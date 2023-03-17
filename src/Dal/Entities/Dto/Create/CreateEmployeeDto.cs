@@ -4,7 +4,6 @@
     { 
         public string Name { get; set; }
         public string Sex { get; set; }
-        public DateOnly Birthday { get; set; }
-        public Guid ProjectId { get; set; }
+        public string Birthday { get; set; }
     }
 }

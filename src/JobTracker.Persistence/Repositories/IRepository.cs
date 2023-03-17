@@ -6,13 +6,13 @@ namespace JobTracker.Persistence.Repositories
 {
     public interface IRepository
     {
-        Task CreateProject(CreateProjectDto project);
-        Task CreateEmployee(CreateEmployeeDto employee);
-        Task CreateActivity(CreateActivityDto activity);
+        Task CreateProject(CreateProjectDto projectDto);
+        Task CreateEmployee(CreateEmployeeDto employeeDto);
+        Task CreateActivity(CreateActivityDto activityDto);
 
-        Task UpdateProject(UpdateProjectDto project);
-        Task UpdateEmployee(UpdateEmployeeDto employee);    
-        Task UpdateActivity(UpdateActyvityDto activity);
+        Task UpdateProject(UpdateProjectDto projectDto);
+        Task UpdateEmployee(UpdateEmployeeDto employeeDto);    
+        Task UpdateActivity(UpdateActyvityDto activityDto);
 
         Task<IQueryable<Project>> GetAllProjects();
         Task<IQueryable<Employee>> GetAllEmployees();

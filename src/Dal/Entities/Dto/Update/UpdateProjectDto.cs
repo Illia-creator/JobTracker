@@ -5,7 +5,7 @@
         public Guid Id { get; set; }
         public string Name { get; set; }
         public bool IsDeleted { get; set; }
-        public DateOnly DateStart { get; set; }
-        public DateOnly DateEnd { get; set; }
+        public string DateStart { get; set; }
+        public string DateEnd { get; set; }
     }
 }

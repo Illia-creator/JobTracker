@@ -11,7 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IRepository, Repository>();
+builder.Services.AddCors();
+builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddDbContext<JobTrackerDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
