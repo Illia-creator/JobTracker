@@ -1,4 +1,4 @@
-﻿namespace Dal.Entities
+﻿namespace JobTracker.Dal.Entities
 {
     public class Employee
     {
@@ -6,5 +6,8 @@
         public string Name { get; set; }
         public string Sex { get; set; }
         public DateOnly Birthday { get; set; }
+        public Guid ProjectId { get; set; }
+        public Project Project { get; set; }
+        public List<Activity> Activities { get; set; }
     }
 }

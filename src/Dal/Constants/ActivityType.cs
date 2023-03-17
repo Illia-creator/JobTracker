@@ -1,4 +1,4 @@
-﻿namespace Dal.Constants
+﻿namespace JobTracker.Dal.Constants
 {
     public static class ActivityType
     {
