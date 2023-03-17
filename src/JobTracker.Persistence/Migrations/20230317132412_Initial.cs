@@ -17,6 +17,7 @@ namespace JobTracker.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     DateStart = table.Column<DateOnly>(type: "date", nullable: false),
                     DateEnd = table.Column<DateOnly>(type: "date", nullable: false)
                 },
@@ -32,6 +33,7 @@ namespace JobTracker.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Sex = table.Column<string>(type: "text", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     Birthday = table.Column<DateOnly>(type: "date", nullable: false),
                     ProjectId = table.Column<Guid>(type: "uuid", nullable: false)
                 },

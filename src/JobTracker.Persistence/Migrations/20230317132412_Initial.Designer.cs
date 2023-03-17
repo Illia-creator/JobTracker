@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JobTracker.Persistence.Migrations
 {
     [DbContext(typeof(JobTrackerDbContext))]
-    [Migration("20230317130050_Initial")]
+    [Migration("20230317132412_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -67,6 +67,9 @@ namespace JobTracker.Persistence.Migrations
                     b.Property<DateOnly>("Birthday")
                         .HasColumnType("date");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -96,6 +99,9 @@ namespace JobTracker.Persistence.Migrations
 
                     b.Property<DateOnly>("DateStart")
                         .HasColumnType("date");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()

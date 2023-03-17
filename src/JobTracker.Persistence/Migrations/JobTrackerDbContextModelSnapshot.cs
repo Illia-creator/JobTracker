@@ -64,6 +64,9 @@ namespace JobTracker.Persistence.Migrations
                     b.Property<DateOnly>("Birthday")
                         .HasColumnType("date");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -93,6 +96,9 @@ namespace JobTracker.Persistence.Migrations
 
                     b.Property<DateOnly>("DateStart")
                         .HasColumnType("date");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
