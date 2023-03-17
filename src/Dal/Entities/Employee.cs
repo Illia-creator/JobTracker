@@ -8,6 +8,6 @@
         public DateOnly Birthday { get; set; }
         public Guid ProjectId { get; set; }
         public Project Project { get; set; }
-        public List<Activity> Activities { get; set; }
+        public List<Activity>? Activities { get; set; }
     }
 }

@@ -18,8 +18,7 @@ namespace JobTracker.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     DateStart = table.Column<DateOnly>(type: "date", nullable: false),
-                    DateEnd = table.Column<DateOnly>(type: "date", nullable: false),
-                    EmployeeId = table.Column<Guid>(type: "uuid", nullable: false)
+                    DateEnd = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {

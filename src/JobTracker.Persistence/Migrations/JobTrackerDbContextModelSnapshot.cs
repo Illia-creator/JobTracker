@@ -94,9 +94,6 @@ namespace JobTracker.Persistence.Migrations
                     b.Property<DateOnly>("DateStart")
                         .HasColumnType("date");
 
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");

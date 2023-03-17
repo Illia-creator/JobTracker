@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JobTracker.Persistence.Migrations
 {
     [DbContext(typeof(JobTrackerDbContext))]
-    [Migration("20230317112444_Initial")]
+    [Migration("20230317130050_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -96,9 +96,6 @@ namespace JobTracker.Persistence.Migrations
 
                     b.Property<DateOnly>("DateStart")
                         .HasColumnType("date");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
