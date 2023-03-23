@@ -1,11 +1,8 @@
 ﻿using JobTracker.Dal.Entities;
-using JobTracker.Dal.Entities.Dto.AddReferences;
 using JobTracker.Dal.Entities.Dto.Create;
 using JobTracker.Dal.Entities.Dto.Update;
 using JobTracker.Persistence.DataContexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Security.Principal;
 using Activity = JobTracker.Dal.Entities.Activity;
 
 namespace JobTracker.Persistence.Repositories
@@ -89,7 +86,7 @@ namespace JobTracker.Persistence.Repositories
         #region DeleteRegion
         public async Task DeleteEmployeeById(Guid id)
         {
-            Employee employee = await context.Employees.FindAsync(id);
+            Employee employee = await context.Employees.FirstOrDefaultAsync(x => x.Id == id);
             if (employee != null || employee.IsDeleted == false)
             {
                 employee.IsDeleted = true;
@@ -100,7 +97,7 @@ namespace JobTracker.Persistence.Repositories
 
         public async Task DeleteProjectById(Guid id)
         {
-            Project project = await context.Projects.FindAsync(id);
+            Project project = await context.Projects.FirstOrDefaultAsync(x => x.Id == id);
             if (project != null || project.IsDeleted == false)
             {
                 project.IsDeleted = true;
@@ -114,7 +111,7 @@ namespace JobTracker.Persistence.Repositories
 
         public async Task<Employee> GetEmployeeById(Guid id)
         {
-            Employee employee = await context.Employees.FindAsync(id);
+            Employee employee = await context.Employees.FirstOrDefaultAsync(x => x.Id == id);
             if (employee == null)
             {
                 throw new Exception("Employee does not exist");
@@ -124,7 +121,7 @@ namespace JobTracker.Persistence.Repositories
 
         public async Task<Project> GetProjectById(Guid id)
         {
-            Project project = await context.Projects.FindAsync(id);
+            Project project = await context.Projects.FirstOrDefaultAsync(x => x.Id == id);
             if (project == null)
             {
                 throw new Exception("Employee does not exist");
@@ -134,7 +131,7 @@ namespace JobTracker.Persistence.Repositories
 
         public async Task<Activity> GetActionById(Guid id)
         {
-            Activity activity = await context.Activities.FindAsync(id);
+            Activity activity = await context.Activities.FirstOrDefaultAsync(x => x.Id == id);
             if (activity == null)
             {
                 throw new Exception("Employee does not exist");
@@ -181,14 +178,13 @@ namespace JobTracker.Persistence.Repositories
         {
             Employee employeeToUpdate = new Employee();
 
-            employeeToUpdate = await context.Employees.FirstOrDefaultAsync(x => x.Name == employeeDto.Name);
+            employeeToUpdate = await context.Employees.FirstOrDefaultAsync(x => x.Id == employeeDto.Id);
 
             if (employeeToUpdate is null || employeeToUpdate.IsDeleted == true) { throw new Exception("Employee is not found or does not work here"); }
             else
             {
                 employeeToUpdate.Name = employeeDto.Name;
                 employeeToUpdate.Sex = employeeDto.Sex;
-                employeeToUpdate.IsDeleted = employeeDto.IsDeleted;
                 employeeToUpdate.Birthday = DateOnly.Parse(employeeDto.Birthday);
 
                 await context.SaveChangesAsync();
@@ -199,15 +195,16 @@ namespace JobTracker.Persistence.Repositories
         {
             Project projectToUpdate = new Project();
 
-            projectToUpdate = await context.Projects.FirstOrDefaultAsync(x => x.Name == projectDto.Name);
+            projectToUpdate = await context.Projects.FirstOrDefaultAsync(x => x.Id == projectDto.Id);
 
             if (projectToUpdate is null || projectToUpdate.IsDeleted == true) throw new Exception("Project is not found or does not work here");
             else
-            { 
+            {
                 projectToUpdate.Name = projectDto.Name;
-                projectToUpdate.IsDeleted = projectDto.IsDeleted;
                 projectToUpdate.DateEnd = DateOnly.Parse(projectDto.DateEnd);
                 projectToUpdate.DateStart = DateOnly.Parse(projectDto.DateStart);
+
+                await context.SaveChangesAsync();
             }
         }
 
