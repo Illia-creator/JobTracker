@@ -1,5 +1,7 @@
 ﻿using JobTracker.Dal.Entities;
+using JobTracker.Dal.Entities.Dto.AddReferences;
 using JobTracker.Dal.Entities.Dto.Create;
+using JobTracker.Dal.Entities.Dto.Update;
 using JobTracker.Persistence.Repositories;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
@@ -31,11 +33,33 @@ namespace JobTracker.Api.Controllers
             return Ok();
         }
 
-        [HttpPost("create_Activity")]
+        [HttpPost("create_activity")]
         public async Task<IActionResult> AddActivity(CreateActivityDto activityDto)
         {
             await repository.CreateActivity(activityDto);
             return Ok();
         }
+
+        [HttpPost("create_reference")]
+        public async Task<IActionResult> AddEmployeeInProject(AddEmployeeInProjectDto EmployeeInProjectDto)
+        {
+            await repository.AddEmployeeInProject(EmployeeInProjectDto);
+            return Ok();
+        }
+
+        [HttpPut("update_employee")]
+        public async Task<IActionResult> UpdateEmployee(UpdateEmployeeDto employeeDto)
+        {
+            await repository.UpdateEmployee(employeeDto);
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllActivities()
+        { 
+           var result = await repository.GetAllActivities();
+            return Ok(result);
+        }
     }
+    
 }

@@ -16,6 +16,10 @@ namespace JobTracker.Persistence.DataContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Employee>(options =>
+            {
+
+            });
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
     }

@@ -22,21 +22,6 @@ namespace JobTracker.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("EmployeeProject", b =>
-                {
-                    b.Property<Guid>("EmployeesId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("EmployeesId", "ProjectId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("EmployeeProject");
-                });
-
             modelBuilder.Entity("JobTracker.Dal.Entities.Activity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -63,10 +48,6 @@ namespace JobTracker.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("ProjectId");
-
                     b.ToTable("Activities");
                 });
 
@@ -86,11 +67,16 @@ namespace JobTracker.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Sex")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Employees");
                 });
@@ -119,48 +105,20 @@ namespace JobTracker.Persistence.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("EmployeeProject", b =>
+            modelBuilder.Entity("JobTracker.Dal.Entities.Employee", b =>
                 {
-                    b.HasOne("JobTracker.Dal.Entities.Employee", null)
-                        .WithMany()
-                        .HasForeignKey("EmployeesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("JobTracker.Dal.Entities.Project", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("JobTracker.Dal.Entities.Activity", b =>
-                {
-                    b.HasOne("JobTracker.Dal.Entities.Employee", "Employee")
-                        .WithMany("Activities")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("JobTracker.Dal.Entities.Project", "Project")
-                        .WithMany("Activities")
+                        .WithMany("Employees")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Employee");
 
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("JobTracker.Dal.Entities.Employee", b =>
-                {
-                    b.Navigation("Activities");
-                });
-
             modelBuilder.Entity("JobTracker.Dal.Entities.Project", b =>
                 {
-                    b.Navigation("Activities");
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

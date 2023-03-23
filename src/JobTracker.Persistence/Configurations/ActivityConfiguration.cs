@@ -9,8 +9,9 @@ namespace JobTracker.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Activity> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.Employee).WithMany(x => x.Activities).HasForeignKey(x => x.EmployeeId);
-            builder.HasOne(x => x.Project).WithMany(x => x.Activities).HasForeignKey(x => x.ProjectId);
+            builder.Property(x => x.Name);
+            builder.Property(x => x.Role);
+            builder.Property(x => x.ActivityType);
         }
     }
 }

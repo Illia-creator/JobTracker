@@ -11,19 +11,18 @@ namespace JobTracker.Persistence.Repositories
         Task CreateActivity(CreateActivityDto activityDto);
 
         Task UpdateProject(UpdateProjectDto projectDto);
-        Task UpdateEmployee(UpdateEmployeeDto employeeDto);    
-        Task UpdateActivity(UpdateActyvityDto activityDto);
+        Task UpdateEmployee(UpdateEmployeeDto employeeDto);
 
-        Task<IQueryable<Project>> GetAllProjects();
-        Task<IQueryable<Employee>> GetAllEmployees();
-        Task<IQueryable<Activity>> GetAllActivities();
+        Task<List<Project>> GetAllProjects();
+        Task<List<Employee>> GetAllEmployees();
+        Task<List<Activity>> GetAllActivities();
 
         Task<Project> GetProjectById(Guid id);
         Task<Employee> GetEmployeeById(Guid id);
         Task<Activity> GetActionById(Guid id);
 
-        Task DeleteProjectById(Guid id); 
-        Task DeleteEmployeeById(Guid id); 
+        Task DeleteProjectById(Guid id);
+        Task DeleteEmployeeById(Guid id);
 
         Task<Activity> GetTrackerByPersonIdAndDate(Guid id, DateOnly date);
         Task<Activity> GetTrackingByPersonIdAndWeekNumber(Guid id, int number);
