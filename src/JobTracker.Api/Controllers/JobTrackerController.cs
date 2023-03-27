@@ -108,6 +108,20 @@ namespace JobTracker.Api.Controllers
         #endregion GetAllRegion
 
         #region GetSpecificRegion
+
+        [HttpGet("activitiy")]
+        public async Task<IActionResult> GetTrackerByPersonIdAndDate(Guid id, string date)
+        {
+            var result = await repository.GetTrackerByPersonIdAndDate(id, date);
+            return Ok(result);
+        }
+
+        [HttpGet("activity")]
+        public async Task<IActionResult> GetTrackingByPersonIdAndWeekNumber(Guid id, int date)
+        {
+            var result = await repository.GetTrackingByPersonIdAndWeekNumber(id, date);
+            return Ok(result);
+        }
         #endregion GetSpecificRegion
 
         #region UpdateRegion

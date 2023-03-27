@@ -3,6 +3,7 @@ using JobTracker.Dal.Entities.Dto.Create;
 using JobTracker.Dal.Entities.Dto.Update;
 using JobTracker.Persistence.DataContexts;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using Activity = JobTracker.Dal.Entities.Activity;
 
 namespace JobTracker.Persistence.Repositories
@@ -161,14 +162,25 @@ namespace JobTracker.Persistence.Repositories
         #endregion GetAllRegion
 
         #region GetSpecificRegion
-        public Task<Activity> GetTrackerByPersonIdAndDate(Guid id, DateOnly date)
+        public async Task<Activity> GetTrackerByPersonIdAndDate(Guid id, string date)
         {
-            throw new NotImplementedException();
+            DateOnly neededDate = DateOnly.Parse(date);
+            Activity activity = new Activity();
+            activity = await context.Activities.Where(x => x.EmployeeId == id).FirstOrDefaultAsync(x => x.Date == neededDate);
+
+            if (activity == null) throw new Exception("Could cot find Activity");
+            else return activity;
         }
 
-        public Task<Activity> GetTrackingByPersonIdAndWeekNumber(Guid id, int number)
+        public async Task<Activity> GetTrackingByPersonIdAndWeekNumber(Guid id, int weekNumber)
         {
-            throw new NotImplementedException();
+            Activity activity = new Activity();
+            if (weekNumber > 52 || weekNumber < 1) throw new Exception("Wrong week number");
+            int week = weekNumber*7;
+            activity = await context.Activities.Where(x => x.Date.Day <= week && x.Date.Day >= week - 7).FirstOrDefaultAsync(x => x.Id == id);
+
+            if (activity == null) throw new Exception("Could cot find Activity");
+            else return activity;
         }
         #endregion GetSpecificRegion
 

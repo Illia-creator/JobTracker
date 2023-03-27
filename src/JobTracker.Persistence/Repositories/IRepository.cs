@@ -24,7 +24,7 @@ namespace JobTracker.Persistence.Repositories
         Task DeleteProjectById(Guid id);
         Task DeleteEmployeeById(Guid id);
 
-        Task<Activity> GetTrackerByPersonIdAndDate(Guid id, DateOnly date);
+        Task<Activity> GetTrackerByPersonIdAndDate(Guid id, string date);
         Task<Activity> GetTrackingByPersonIdAndWeekNumber(Guid id, int number);
     }
 }
