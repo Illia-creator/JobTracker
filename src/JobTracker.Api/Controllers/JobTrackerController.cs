@@ -1,10 +1,6 @@
-﻿using JobTracker.Dal.Entities;
-using JobTracker.Dal.Entities.Dto.AddReferences;
-using JobTracker.Dal.Entities.Dto.Create;
+﻿using JobTracker.Dal.Entities.Dto.Create;
 using JobTracker.Dal.Entities.Dto.Update;
 using JobTracker.Persistence.Repositories;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobTracker.Api.Controllers
@@ -61,7 +57,7 @@ namespace JobTracker.Api.Controllers
         #region GetByIdRegion
 
         [HttpGet("employee")]
-        public async Task<IActionResult> GetEmployee(Guid Id) 
+        public async Task<IActionResult> GetEmployee(Guid Id)
         {
             var result = await repository.GetEmployeeById(Id);
             return Ok(result);
@@ -141,5 +137,5 @@ namespace JobTracker.Api.Controllers
         }
         #endregion UpdateRegion       
     }
-    
+
 }
